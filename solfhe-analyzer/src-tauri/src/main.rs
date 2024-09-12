@@ -153,3 +153,127 @@ async fn get_results(state: tauri::State<'_, Arc<Mutex<AnalysisState>>>) -> Resu
     let analysis_state = state.lock().await;
     Ok(analysis_state.results.clone())
 }
+
+fn get_chrome_history_path() -> PathBuf {
+  let home = dirs::home_dir().expect("Unable to find home directory");
+  if cfg!(target_os = "windows") {
+      home.join(r"AppData\Local\Google\Chrome\User Data\Default\History")
+  } else if cfg!(target_os = "macos") {
+      home.join("Library/Application Support/Google/Chrome/Default/History")
+  } else {
+      home.join(".config/google-chrome/Default/History")
+  }
+}
+
+fn extract_links_from_chrome() -> Result<Vec<String>, Box<dyn std::error::Error>> {
+  let history_path = get_chrome_history_path();
+  let temp_path = history_path.with_extension("tmp");
+
+  fs::copy(&history_path, &temp_path)?;
+
+  let conn = Connection::open(&temp_path)?;
+  let mut stmt = conn.prepare("SELECT url FROM urls ORDER BY last_visit_time DESC LIMIT 5")?;
+  
+  let urls: Vec<String> = stmt.query_map([], |row| row.get(0))?
+      .filter_map(Result::ok)
+      .collect();
+
+  fs::remove_file(temp_path)?;
+
+  Ok(urls)
+}
+
+fn extract_keywords_from_url(url: &str) -> Vec<String> {
+  let ignored_words: HashSet<_> = IGNORED_WORDS.iter().map(|&s| s.to_string()).collect();
+  
+  if let Ok(parsed_url) = Url::parse(url) {
+      let domain = parsed_url.domain().unwrap_or("");
+      let path = parsed_url.path();
+      
+      domain.split('.')
+          .chain(path.split('/'))
+          .filter_map(|segment| {
+              let lowercase_segment = segment.to_lowercase();
+              if segment.is_empty() || ignored_words.contains(&lowercase_segment) {
+                  None
+              } else {
+                  Some(lowercase_segment)
+              }
+          })
+          .collect()
+  } else {
+      Vec::new()
+  }
+}
+
+fn analyze_link(link: &str, word_counter: &mut HashMap<String, u32>) {
+  let keywords = extract_keywords_from_url(link);
+
+  for word in keywords {
+      if BLOCKCHAIN_NETWORKS.contains(&word.as_str()) || word.len() > 3 {
+          *word_counter.entry(word).or_insert(0) += 1;
+      }
+  }
+}
+
+fn get_most_common_word(word_counter: &HashMap<String, u32>) -> Option<(String, u32)> {
+  word_counter.iter()
+      .max_by_key(|&(_, count)| count)
+      .map(|(word, count)| (word.clone(), *count))
+}
+
+fn zk_compress(data: &str) -> String {
+  let compressed = general_purpose::STANDARD_NO_PAD.encode(data);
+  println!("Compressed data: {}", compressed);
+  compressed
+}
+
+fn zk_decompress(compressed_data: &str) -> Result<String, Box<dyn std::error::Error>> {
+  println!("Attempting to decompress: {}", compressed_data);
+  let bytes = general_purpose::STANDARD_NO_PAD.decode(compressed_data.trim_matches('"'))?;
+  let decompressed = String::from_utf8(bytes)?;
+  println!("Decompressed data: {}", decompressed);
+  Ok(decompressed)
+}
+
+fn create_solana_account() -> Keypair {
+  Keypair::new()
+}
+
+fn airdrop_sol(client: &RpcClient, pubkey: &Pubkey, amount: u64) -> Result<(), Box<dyn std::error::Error>> {
+  let sig = client.request_airdrop(pubkey, amount)?;
+  client.confirm_transaction(&sig)?;
+  println!("✈️ Airdrop request sent for {} lamports", amount);
+  
+  std::thread::sleep(Duration::from_secs(5));
+  
+  let balance = client.get_balance(pubkey)?;
+  println!("Current balance after airdrop: {} lamports", balance);
+  
+  if balance == 0 {
+      return Err("Airdrop failed: Balance is still 0".into());
+  }
+  
+  Ok(())
+}
+
+fn ensure_minimum_balance(client: &RpcClient, pubkey: &Pubkey, minimum_balance: u64) -> Result<(), Box<dyn std::error::Error>> {
+  let mut attempts = 0;
+  while attempts < 3 {
+      let balance = client.get_balance(pubkey)?;
+      if balance >= minimum_balance {
+          println!("Sufficient balance: {} lamports", balance);
+          return Ok(());
+      }
+      
+      println!("Insufficient balance: {} lamports. Attempting airdrop...", balance);
+      if let Err(e) = airdrop_sol(client, pubkey, minimum_balance - balance) {
+          println!("Airdrop attempt failed: {}. Retrying...", e);
+      }
+      
+      attempts += 1;
+      std::thread::sleep(Duration::from_secs(5));
+  }
+  
+  Err("Failed to ensure minimum balance after multiple attempts".into())
+}
