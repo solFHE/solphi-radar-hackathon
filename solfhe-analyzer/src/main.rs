@@ -11,6 +11,9 @@ run metodu, sürekli çalışan bir döngü içinde her 60 saniyede bir yeni lin
 
 
 
+
+// 🏗️ Developed by: Baturalp Güvenç 
+
 use std::collections::{HashMap, HashSet};
 use std::fs;
 use std::path::PathBuf;

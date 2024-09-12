@@ -1,0 +1,94 @@
+{
+  "build": {
+    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "npm run dev",
+    "devPath": "-",
+    "distDir": "/Users/dante/Desktop/reacthreejs/solfi-radar/solfhe-analyzer/tauri.conf.json"
+  },
+  "package": {
+    "productName": "solfi",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "all": false,
+        "execute": true,
+        "sidecar": false,
+        "open": true
+      },
+      "fs": {
+        "all": false,
+        "readFile": true,
+        "writeFile": true,
+        "readDir": true,
+        "copyFile": false,
+        "createDir": false,
+        "removeDir": false,
+        "removeFile": false,
+        "renameFile": false,
+        "exists": true
+      },
+      "path": {
+        "all": false
+      },
+      "protocol": {
+        "asset": true,
+        "assetScope": ["$RESOURCE/*"]
+      }
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.solfhe.analyzer",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "resources": [
+        "blink-matcher.py"
+      ],
+      "externalBin": [
+        "binaries/python3"
+      ],
+      "copyright": "© 2024 Solfhe Analyzer. All rights reserved.",
+      "category": "DeveloperTool",
+      "shortDescription": "Blockchain interaction analyzer",
+      "longDescription": "Solfhe Analyzer is a tool for analyzing blockchain interactions and processing Chrome history data.",
+      "deb": {
+        "depends": ["python3"]
+      },
+      "macOS": {
+        "frameworks": [],
+        "minimumSystemVersion": "10.13",
+        "exceptionDomain": "",
+        "signingIdentity": null,
+        "entitlements": null
+      },
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'"
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "title": "Solfhe Analyzer",
+        "width": 800,
+        "height": 600
+      }
+    ]
+  }
+}

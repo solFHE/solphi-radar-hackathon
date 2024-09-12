@@ -12,15 +12,22 @@ rust-version = "1.60"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "1.5.4" }
+tauri-build = { version = "1.2", features = [] }
 
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.7.2" }
+tauri = { version = "1.2", features = ["shell-open"] }
+tokio = { version = "1.25", features = ["full"] }
+rusqlite = { version = "0.28.0", features = ["bundled"] }
+url = "2.3.1"
+sha2 = "0.10.6"
+base64 = "0.21.0"
+solana-sdk = "1.14"
+solana-client = "1.14"
+solana-transaction-status = "1.14"
+spl-memo = "3.0.1"
 
 [features]
-# this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.
-# If you use cargo directly instead of tauri's cli you can use this feature flag to switch between tauri's `dev` and `build` modes.
-# DO NOT REMOVE!!
+default = [ "custom-protocol" ]
 custom-protocol = [ "tauri/custom-protocol" ]
