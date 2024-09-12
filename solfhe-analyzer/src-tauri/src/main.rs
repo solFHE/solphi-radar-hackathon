@@ -334,8 +334,15 @@ fn save_results_to_file(results: &[AnalysisResult]) -> Result<(), Box<dyn std::e
 }
 
 fn run_python_script() -> Result<(), Box<dyn std::error::Error>> {
+  let current_dir = env::current_dir()?;
+  let script_path = current_dir.join("blink-matcher.py");
+  
+  if !script_path.exists() {
+      return Err("Python script not found".into());
+  }
+
   let output = Command::new("python3")
-      .arg("blink-matcher.py")
+      .arg(script_path)
       .output()?;
 
   if output.status.success() {
@@ -349,6 +356,7 @@ fn run_python_script() -> Result<(), Box<dyn std::error::Error>> {
 
   Ok(())
 }
+
 
 #[tokio::main]
 async fn main() {
