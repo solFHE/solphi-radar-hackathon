@@ -277,3 +277,104 @@ fn ensure_minimum_balance(client: &RpcClient, pubkey: &Pubkey, minimum_balance: 
   
   Err("Failed to ensure minimum balance after multiple attempts".into())
 }
+fn transfer_compressed_hash(
+  client: &RpcClient,
+  payer: &Keypair,
+  to: &Pubkey,
+  compressed_hash: &str,
+) -> Result<Signature, Box<dyn std::error::Error>> {
+  ensure_minimum_balance(client, &payer.pubkey(), 1_000_000_000)?; // Ensure 1 SOL minimum
+
+  let rent = client.get_minimum_balance_for_rent_exemption(0)?;
+  let transfer_amount = rent + 1000; // Transfer rent + 1000 lamports
+
+  let transfer_ix = system_instruction::transfer(&payer.pubkey(), to, transfer_amount);
+  let memo_ix = spl_memo::build_memo(compressed_hash.as_bytes(), &[&payer.pubkey()]);
+  
+  let recent_blockhash = client.get_latest_blockhash()?;
+  let transaction = Transaction::new_signed_with_payer(
+      &[transfer_ix, memo_ix],
+      Some(&payer.pubkey()),
+      &[payer],
+      recent_blockhash,
+  );
+  
+  let signature = client.send_and_confirm_transaction(&transaction)?;
+  println!("🏆 Successfully transferred compressed hash. Transaction signature: {}", signature);
+  println!("⛓️✅ Transaction link: https://explorer.solana.com/tx/{}?cluster=custom", signature);
+
+  Ok(signature)
+}
+
+fn retrieve_and_decompress_hash(client: &RpcClient, signature: &Signature) -> Result<String, Box<dyn std::error::Error>> {
+  let transaction = client.get_transaction(signature, UiTransactionEncoding::Json)?;
+  
+  if let Some(meta) = transaction.transaction.meta {
+      if let Some(log_messages) = meta.log_messages {
+          for log in log_messages {
+              if log.starts_with("Program log: Memo") {
+                  if let Some(start_index) = log.find("): ") {
+                      let compressed_hash = &log[start_index + 3..];
+                      return zk_decompress(compressed_hash);
+                  }
+              }
+          }
+      }
+  }
+
+  Err("Could not find or process memo in transaction logs".into())
+}
+
+fn save_results_to_file(results: &[AnalysisResult]) -> Result<(), Box<dyn std::error::Error>> {
+  let json_string = serde_json::to_string_pretty(results)?;
+  let mut file = File::create("solfhe.json")?;
+  file.write_all(json_string.as_bytes())?;
+  println!("Results saved to solfhe.json");
+  Ok(())
+}
+
+fn run_python_script() -> Result<(), Box<dyn std::error::Error>> {
+  let output = Command::new("python3")
+      .arg("blink-matcher.py")
+      .output()?;
+
+  if output.status.success() {
+      println!("Python script executed successfully");
+      println!("Output: {}", String::from_utf8_lossy(&output.stdout));
+  } else {
+      println!("Python script failed to execute");
+      println!("Error: {}", String::from_utf8_lossy(&output.stderr));
+      return Err("Python script execution failed".into());
+  }
+
+  Ok(())
+}
+
+#[tokio::main]
+async fn main() {
+  let client = RpcClient::new("http://localhost:8899".to_string());
+  let account1 = create_solana_account();
+  let account2 = create_solana_account();
+
+  println!("Account 1 public key: {}", account1.pubkey());
+  println!("Account 2 public key: {}", account2.pubkey());
+
+  let analysis_state = Arc::new(Mutex::new(AnalysisState { 
+      is_running: false,
+      results: Vec::new(),
+      client,
+      account1,
+      account2,
+  }));
+
+  tauri::Builder::default()
+      .manage(analysis_state)
+      .setup(|app| {
+          let window = app.get_window("main").unwrap();
+          window.set_title("Solfhe Analyzer").unwrap();
+          Ok(())
+      })
+      .invoke_handler(tauri::generate_handler![start_analysis, stop_analysis, get_results])
+      .run(tauri::generate_context!())
+      .expect("error while running tauri application");
+}
