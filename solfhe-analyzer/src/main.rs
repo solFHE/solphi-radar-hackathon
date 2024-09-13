@@ -10,6 +10,7 @@ run metodu, sürekli çalışan bir döngü içinde her 60 saniyede bir yeni lin
 
 
 use eframe::egui;
+use eframe::epi;
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::collections::{HashMap, HashSet};
