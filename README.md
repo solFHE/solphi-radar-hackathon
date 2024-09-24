@@ -28,9 +28,7 @@
 
 ## Introduction
 
-Solfhe Analyzer is an advanced data analysis and blockchain integration tool designed to extract meaningful insights from web browsing patterns and securely store them on the Solana blockchain. This project exemplifies the convergence of big data analytics, cryptographic techniques, and distributed ledger technology.
-
-The analyzer operates by extracting recent URLs from the Chrome browser's history, performing sophisticated keyword analysis, and utilizing custom compression algorithms before interacting with the Solana blockchain. This approach ensures data integrity, confidentiality, and immutability while leveraging the high-performance capabilities of the Solana network.
+solΦ offers a user-friendly advertising tool that turns adverts into a source of income for users. Users earn by watching adverts and using advertising platforms, while advertisers can reach their target audience directly. This creates an ecosystem that delivers value for both parties. At the same time, advertisers can never read users' data. Privacy and profit are ensured by zk-compression.
 
 ## Core Concepts
 
