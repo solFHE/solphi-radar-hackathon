@@ -1,4 +1,4 @@
-# Solfhe Analyzer
+# Solphi
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -28,7 +28,15 @@
 
 ## Introduction
 
-solΦ offers a user-friendly advertising tool that turns adverts into a source of income for users. Users earn by watching adverts and using advertising platforms, while advertisers can reach their target audience directly. This creates an ecosystem that delivers value for both parties. At the same time, advertisers can never read users' data. Privacy and profit are ensured by zk-compression.
+solΦ offers a user-friendly advertising tool that turns adverts into a source of income for users. Users earn by watching adverts and using advertising platforms, while advertisers can reach their target audience directly. This creates an ecosystem that delivers value for both parties. At the same time, advertisers can never read users' data. Privacy and profit are ensured by zk-compression. We will not allow your data to be sold, we are here with a solution to ensure your security and if you are watching adverts you can make money from it.
+
+solΦ is an innovative advertising platform where users earn revenue by watching ads, advertisers can reach their target audience directly, and privacy is guaranteed with zk-compression technology.
+
+- More succinct and concise, so that it can quickly grab investors' attention.
+- It clearly sets out the Platform's core value proposition.
+- It emphasises the benefits for both users and advertisers.
+- Highlights technological differentiation (zk-compression).
+- Includes keywords such as ‘ecosystem’ and ‘value’ that can attract investors.
 
 ## Core Concepts
 
@@ -46,7 +54,7 @@ solΦ offers a user-friendly advertising tool that turns adverts into a source o
 
 ## System Architecture
 
-The Solfhe Analyzer follows a modular architecture, comprised of the following key components:
+The solphi follows a modular architecture, comprised of the following key components:
 
 1. **Data Extraction Layer**: Interfaces with the Chrome browser's SQLite database.
 2. **Analysis Engine**: Processes raw URL data to extract meaningful insights.
@@ -69,6 +77,14 @@ The Solfhe Analyzer follows a modular architecture, comprised of the following k
 | Python Integration | Executes additional data processing scripts | Python subprocess management |
 
 ## Features
+Our consumer app has four basic features:
+
+Ad Display Feature: We integrate adverts with a user-friendly interface.
+Reward System: We reward our users with tokens for watching adverts.
+Gamification: We make the user experience more fun and engaging.
+Blinks Free: We give our users more control over the internet on our security-oriented platform.
+
+These features add value to our users and provide an effective platform for advertisers.
 
 - Chrome History Analysis
 - Advanced Keyword Extraction and Quantification
@@ -80,6 +96,17 @@ The Solfhe Analyzer follows a modular architecture, comprised of the following k
 - Configurable Analysis Parameters
 - Robust Error Handling and Logging
 - Performance-Optimized Data Structures
+
+
+## Revenue Model
+
+Our revenue model is based entirely on advertisers creating campaigns in our app and never takes money from users. We are committed to distributing 10% of our campaign revenues to users through blinks.
+
+## ROI
+solΦ, enables users to improve their internet experience while at the same time generating revenue by watching adverts. Advertisers increase their ROI by running more effective, targeted and measurable campaigns. This innovative model rewards users and creates higher quality interactions for advertisers.isers have the opportunity to increase their return on investment (ROI) by running more effective, targeted and measurable campaigns.
+Advertisers have the opportunity to increase their return on investment (ROI) by running more effective, targeted and measurable campaigns.
+This model benefits both parties by rewarding users while at the same time creating higher quality interactions for advertisers.
+
 
 ## Prerequisites
 
@@ -121,7 +148,7 @@ The Solfhe Analyzer follows a modular architecture, comprised of the following k
 
 ## Configuration
 
-The Solfhe Analyzer can be configured via the `config.toml` file. Key configuration parameters include:
+The Solphi Analyzer can be configured via the `config.toml` file. Key configuration parameters include:
 
 - `analysis_interval`: Time between analysis cycles (in seconds)
 - `max_urls_per_cycle`: Maximum number of URLs to analyze in each cycle
@@ -144,11 +171,11 @@ The Solfhe Analyzer can be configured via the `config.toml` file. Key configurat
 
 3. Monitor the output in the terminal for analysis results and blockchain interactions.
 
-4. Check the `solfhe.json` file for persistent storage of analysis results.
+4. Check the `.json` file for persistent storage of analysis results.
 
 ## Solana Integration
 
-The Solfhe Analyzer interacts with the Solana blockchain in several ways:
+The Solphi interacts with the Solana blockchain in several ways:
 
 1. **Account Management**: Creates and manages Solana accounts for data transactions.
 2. **Transaction Handling**: Constructs, signs, and submits transactions containing compressed analysis data.
@@ -156,6 +183,8 @@ The Solfhe Analyzer interacts with the Solana blockchain in several ways:
 4. **Balance Monitoring**: Ensures sufficient SOL balance for transaction fees.
 
 The integration leverages Solana's high throughput and low latency to provide near real-time data storage and retrieval.
+In our demo, we enter logs for continuous advertisement in the browser. we will also do it on different sites in the later part of the demo, you will see it in a moment. we show you the hash transport and matching of the zk-compression process by reflecting our transactions to the terminal with a solana memo and we look at it from the transaction hash we receive. Now I will enter the logs of my own project from the browser and let's see how the project will work.
+
 
 ## Data Processing Pipeline
 
@@ -228,7 +257,7 @@ Regular maintenance tasks include:
 
 ## Contributing
 
-We welcome contributions to the Solfhe Analyzer project. Please follow these steps:
+We welcome contributions to the Solphi project. Please follow these steps:
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature-name`
