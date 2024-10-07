@@ -1,4 +1,4 @@
-# solΦ: Privacy-Focused Advertising Platform with Multi-Blockchain Support
+# solΦ: Privacy-Focused Advertising Platform
 
 ![1](https://github.com/user-attachments/assets/7a641c3b-7f04-4be6-ba24-523b9dbf089a)
 
@@ -31,7 +31,7 @@
 
 ## Introduction
 
-solΦ is an innovative multi-blockchain-powered platform where users earn income by watching ads, advertisers can reach their target audiences directly, and privacy is guaranteed by zk-compression technology is an advertising platform. By integrating Solana and Sei blockchains, it offers a wide ecosystem to users and advertisers.
+solΦ is an innovative multi-blockchain-powered platform where users earn income by watching ads, advertisers can reach their target audiences directly, and privacy is guaranteed by zk-compression technology is an advertising platform. By integrating Solana blockchains, it offers a wide ecosystem to users and advertisers.
 
 ## Basic Concepts
 
@@ -41,13 +41,9 @@ solΦ is an innovative multi-blockchain-powered platform where users earn income
 
 3. **ZK Compression**: Special algorithm that reduces data size and adds a layer of privacy.
 
-4. **Multi-Blockchain Integration**: Uses Solana and Sei blockchains.
+4. **Asynchronous Processing**: Provides high performance with non-blocking I/O operations.
 
-5. **Cross-Chain Bridge**: Provides data and token transfer between different blockchains with the Wormhole protocol.
-
-6. **Asynchronous Processing**: Provides high performance with non-blocking I/O operations.
-
-7. **Automatic Execution**: Loop that analyzes at configurable intervals.
+5. **Automatic Execution**: Loop that analyzes at configurable intervals.
 
 ## System Architecture
 
@@ -58,8 +54,7 @@ solΦ has a modular and multi-blockchain supported architecture:
 3. **Compression Module**: Implement ZK compression algorithm.
 4. **Blockchain Interface**:
 - Solana Module: Manages interactions with Solana blockchain.
-- Sei Module: Manages interactions with Sei blockchain.
-5. **Wormhole Bridge Module**: Manages cross-chain transactions.
+5. **Wormhole Bridge Module**: Manages cross-chain transactions. (coming soon)
 6. **Persistence Layer**: Local storage of processed data and configuration.
 7. **Execution Controller**: Orchestrates the overall flow and scheduling of operations.
 
@@ -69,7 +64,6 @@ solΦ has a modular and multi-blockchain supported architecture:
 | Keyword Analyzer | Extracts and counts important terms by processing URLs | Custom NLP algorithms, Rust standard library |
 | ZK Compressor | Compresses data with additional privacy layer | Custom encryption, SHA-256, AES-256 |
 | Solana Interface | Manages Solana blockchain interactions | Solana SDK, RPC client |
-| Sei Interface | Manages Sei blockchain interactions | Sei SDK, CosmWasm |
 | Wormhole Bridge | Manages cross-chain transactions | Wormhole SDK |
 | Data Persistent | Stores processed data locally | Serde, JSON |
 | Execution Controller | Orchestrates the analysis loop | Rust's async/await, Tokio |
@@ -79,28 +73,25 @@ solΦ has a modular and multi-blockchain supported architecture:
 
 ## Features
 
-1. **Multi-Blockchain Support**: Integrates Solana and Sei blockchains.
+1. **Cross-Chain Transactions**: Transfer data and tokens between blockchains with Wormhole protocol.
 
-2. **Cross-Chain Transactions**: Transfer data and tokens between blockchains with Wormhole protocol.
+2. **Ad Display Feature**: Integrates ads with user-friendly interface.
 
-3. **Ad Display Feature**: Integrates ads with user-friendly interface.
+3. **Gamification**: Makes user experience more fun and engaging.
 
-4. **Multi-Token Reward System**: Rewards users with SOL, SEI and other tokens.
+4. **Blinks Free**: Provides users with more control over the internet on a security-focused platform.
 
-5. **Gamification**: Makes user experience more fun and engaging.
+5. **Advanced Keyword Extraction**: Uses custom NLP algorithms.
 
-6. **Blinks Free**: Provides users with more control over the internet on a security-focused platform.
+6. **Custom ZK Compression Algorithm**: Provides compression while preserving data privacy.
 
-7. **Advanced Keyword Extraction**: Uses custom NLP algorithms.
+7. **Automatic Execution Cycle**: Performs periodic analysis.
 
-8. **Custom ZK Compression Algorithm**: Provides compression while preserving data privacy.
+8. **JSON-based Data Persistence**: Stores processed data locally.
 
-9. **Automatic Execution Cycle**: Performs periodic analysis.
-10. **JSON-based Data Persistence**: Stores processed data locally.
+9. **Configurable Analysis Parameters**: Provides flexible system settings.
 
-11. **Configurable Analysis Parameters**: Provides flexible system settings.
-
-12. **Robust Error Management and Logging**: Provides comprehensive error tracking and reporting.
+10. **Robust Error Management and Logging**: Provides comprehensive error tracking and reporting.
 
 ## Blockchain Integrations
 
@@ -118,22 +109,11 @@ solΦ interacts with the Solana blockchain in the following ways:
 
 Solana’s high throughput (65,000 TPS) and low latency (400ms block time) enable near real-time data storage and access.
 
-### Sei Integration
-
-The integration with the Sei blockchain includes the following features:
-
-1. **Smart Contract Development**: Develops custom smart contracts on Sei using CosmWasm.
-2. **SEI Token Integration**: Users are rewarded with SEI tokens.
-
-3. **High Throughput Transactions**: Fast and efficient transactions are performed with Sei's FCAS (Frequent Batch Auctions) mechanism.
-
-4. **Parallel Execution**: System performance is increased by using Sei's parallel transaction execution feature.
-
 ### Wormhole Bridge Integration
 
-The Wormhole protocol enables solΦ to perform secure and efficient cross-chain transactions between Solana and Sei:
+The Wormhole protocol enables solΦ to perform secure and efficient cross-chain transactions between Solana and EVM:
 
-1. **Token Bridge**: Bidirectional transfers between SOL and SEI tokens.
+1. **Token Bridge**: Bidirectional transfers between SOL and EVM.
 
 2. **Data Bridge**: Inter-blockchain data transfer and synchronization.
 
@@ -157,13 +137,11 @@ solΦ's revenue model is based on advertisers creating campaigns on our app:
 
 - Rust (stable channel, version 1.55 or later)
 - Solana CLI tools (version 1.7 or later)
-- Sei CLI tools
 - Python 3.8+
 - Chrome browser (version 90 or later)
 - SQLite3
 - OpenSSL development packages
 - Wormhole SDK
-- CosmWasm development tools
 
 ## Installation
 
@@ -264,6 +242,7 @@ ZK compression algorithm uses the following techniques:
 - **Parallel Processing**: Rayon library is used for parallel data processing when appropriate
 - **Compression Optimization**: ZK compression algorithm is tuned for optimal balance between data size and processing time
 - **Smart Contract Optimization**: Smart contracts on Sei are optimized to minimize gas cost
+
 ## Error Management and Logging
 
 - Extensive error management using Rust's `Result` and `Option` types
@@ -306,9 +285,8 @@ ZK compression algorithm uses the following techniques:
 3. Advanced user profiling and interest analysis
 4. Real-time ad auction system
 5. Mobile app development (iOS and Android)
-6. VR/AR advertising integration
-7. Blockchain-based authentication system
-8. Integration of more advanced ZK-proof systems
+6. Blockchain-based authentication system
+7. Integration of more advanced ZK-proof systems
 
 ## Contributing
 
@@ -331,7 +309,6 @@ See [FAQ.md](FAQ.md) for frequently asked questions.
 
 - **ZK Compression**: Zero-Knowledge Compression, a special algorithm that preserves privacy while compressing data
 - **Wormhole**: Protocol that allows token and data transfer between different blockchains
-- **SEI**: A high-performance, DeFi-focused Layer-1 blockchain
 - **Blinks**: Micro-rewards distributed to users on the solΦ platform
 
 ## References
