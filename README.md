@@ -161,6 +161,43 @@ In future iterations, solΦ will incorporate cutting-edge NLP technologies in co
 
 These advancements will be implemented with a continued focus on user privacy and data minimization.
 
+## 🛡️ Security Measures and Audit Process
+
+At solΦ, we prioritize the integrity of our platform and the fairness of our reward system. To ensure a secure and equitable environment for all users, we've implemented robust measures against potential exploitation and undergone rigorous third-party audits.
+[**Ironnode Securtiy**](https://www.ironnode.io/)
+
+### Bot Prevention with Twitter API Integration
+
+To combat the risk of automated systems unfairly accumulating "Blinks" tokens, we've integrated advanced bot detection mechanisms leveraging the Twitter API:
+
+1. **User Verification**: 
+   - New users are required to link a valid Twitter account.
+   - We analyze account age, follower count, and posting patterns to establish authenticity.
+
+2. **Activity Correlation**:
+   - We compare ad interaction patterns with Twitter activity timelines.
+   - Suspicious discrepancies trigger additional verification steps.
+
+3. **Natural Language Processing (NLP)**:
+   - We employ sophisticated NLP algorithms to analyze Twitter content.
+   - This helps distinguish between human-generated and bot-generated text.
+
+4. **Rate Limiting**:
+   - We implement dynamic rate limiting based on account characteristics.
+   - This prevents rapid-fire ad interactions typical of bot behavior.
+
+5. **Behavioral Analysis**:
+   - Our system monitors and learns from user behavior over time.
+   - Unusual patterns or sudden changes in behavior are flagged for review.
+
+```yaml
+Twitter API Integration:
+  - Account Verification: True
+  - Activity Correlation: Enabled
+  - NLP Analysis: Advanced
+  - Rate Limiting: Dynamic
+  - Behavioral Monitoring: Continuous 
+```
 
 ## 🛠 Installation
 
