@@ -28,9 +28,8 @@
 
 solΦ offers a user-friendly advertising tool that turns adverts into a source of income for users. Users earn by watching adverts and using advertising platforms, while advertisers can reach their target audience directly. This creates an ecosystem that delivers value for both parties. At the same time, advertisers can never read users' data. Privacy and profit are ensured by zk-compression.
 
-### Demo
-
-🎥 [DEMO VIDEO](..)
+### Presentation & Demo
+[**GO TO VIDEO**](https://youtu.be/dmeyBtGbCMg)
 
 ### Problem
 You can see the biggest disadvantages of traditional advertisement applications or protocols:
