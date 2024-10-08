@@ -1,41 +1,45 @@
 [package]
-name = "app"
+name = "solphi"
 version = "0.1.0"
-description = "A Tauri App"
+description = "Solphi - Solana based link analyzer with Light Protocol integration"
 authors = ["you"]
 license = ""
 repository = ""
-default-run = "app"
 edition = "2021"
 rust-version = "1.60"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[build-dependencies]
-tauri-build = { version = "1.2", features = [] }
 
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.2", features = ["shell-open"] }
 tokio = { version = "1.25", features = ["full"] }
-rusqlite = { version = "0.28.0", features = ["bundled"] }
+rusqlite = { version = "0.32.1", features = ["bundled"] }
 url = "2.3.1"
 sha2 = "0.10.6"
-base64 = "0.21.0"
-solana-sdk = "1.14"
-solana-client = "1.14"
-solana-transaction-status = "1.14"
-spl-memo = "3.0.1"
-eframe = "0.21.0"
-egui = "0.21.0"
-dirs = "4.0"
-tokio = { version = "1.25", features = ["full"] }
-open = "3.0"
+base64 = "0.22.1"
+solana-sdk = "2.0.13"
+solana-client = "2.0.13"
+solana-program = "2.0.13"
+solana-transaction-status = "2.0.13"
+spl-memo = "5.0.0"
+dirs = "5.0.1"
+borsh = "1.5.1"
+light-sdk = "0.11.0" 
+eframe = "0.29.1"
+egui = "0.29.1"
+open = "5.3.0"
 
-
-
+[lib]
+crate-type = ["cdylib", "rlib"]
 
 [features]
-default = [ "custom-protocol" ]
-custom-protocol = [ "tauri/custom-protocol" ]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+tauri = { version = "2.0.2", features = ["shell-open"] }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+
+[build-dependencies]
+tauri-build = { version = "2.0.1", features = [] }
