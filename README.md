@@ -1,7 +1,8 @@
 # solΦ: Privacy-Preserving Advertising Platform
 
-<div align="center">
   <img src="https://your-image-url.com/solphi-logo.png" alt="solΦ Logo" width="200"/>
+
+<div align="center">
   
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   [![Rust](https://img.shields.io/badge/Rust-1.55+-orange.svg)](https://www.rust-lang.org/)
