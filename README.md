@@ -1,6 +1,5 @@
 # solΦ: Privacy-Preserving Advertising Platform
-
-  <img src="https://your-image-url.com/solphi-logo.png" alt="solΦ Logo" width="200"/>
+![1](https://github.com/user-attachments/assets/00468590-236a-4d69-98d5-c2ce8fa4cb81)
 
 <div align="center">
   
