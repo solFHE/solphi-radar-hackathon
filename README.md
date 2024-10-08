@@ -161,6 +161,11 @@ In future iterations, solΦ will incorporate cutting-edge NLP technologies in co
 
 These advancements will be implemented with a continued focus on user privacy and data minimization.
 
+### Twitter
+#### https://x.com/sol_fiii
+<img width="616" alt="x" src="https://github.com/user-attachments/assets/9b5c6799-ed15-4f6f-8380-3f6c1fab9d84">
+
+
 ## 🛠 Installation
 
 Detailed installation instructions...
