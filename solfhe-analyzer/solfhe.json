@@ -1,4 +1,18 @@
 {
-  "count": 2,
-  "most_common_word": "zk-lokomotive"
+  "top_words": [
+    [
+      "gemini",
+      4
+    ],
+    [
+      "dbgnhckhnppddckangcjbkjnlddbjkna",
+      1
+    ],
+    [
+      "popup.html",
+      1
+    ]
+  ],
+  "total_links_analyzed": 5,
+  "total_unique_words": 3
 }
