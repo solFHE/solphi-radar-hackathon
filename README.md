@@ -43,20 +43,9 @@ solΦ represents a paradigm shift in digital advertising, leveraging the power o
 ## 🏗 System Architecture
 
 solΦ's architecture is designed for scalability, security, and interoperability:
+<img width="800" alt="arch" src="https://github.com/user-attachments/assets/0dc5e7a1-afb0-4946-98b1-50dfaff22462">
 
-```mermaid
-graph TD
-    A[User Interface] --> B[API Gateway]
-    B --> C[Ad Serving Engine]
-    B --> D[Analytics Engine]
-    C --> E[ZK-Compression Module]
-    D --> E
-    E --> F[Blockchain Interface]
-    F --> G[Solana Network]
-    F --> H[Light Protocol]
-    F --> I[Wormhole Bridge]
-    I --> J[Other Blockchain Networks]
-```
+
 
 ## Blockchain Integrations
 
