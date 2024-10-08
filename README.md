@@ -27,7 +27,15 @@
 ## Introduction
 
 solΦ offers a user-friendly advertising tool that turns adverts into a source of income for users. Users earn by watching adverts and using advertising platforms, while advertisers can reach their target audience directly. This creates an ecosystem that delivers value for both parties. At the same time, advertisers can never read users' data. Privacy and profit are ensured by zk-compression.
-solΦ represents a paradigm shift in digital advertising, leveraging the power of multiple blockchains and cutting-edge privacy technologies. Our platform empowers users to monetize their attention while providing advertisers with unprecedented targeting capabilities, all within a framework that prioritizes user privacy and data sovereignty. 
+
+### Problem
+You can see the biggest disadvantages of traditional advertisement applications or protocols:
+![Problem](https://github.com/user-attachments/assets/aeccf05c-e811-48cf-bed7-40babab28a86)
+
+### Solution
+solΦ is an private advertising platform where users earn revenue by watching ads, advertisers can reach their target audience directly, and privacy is guaranteed with zk-compression technology:
+![Solution](https://github.com/user-attachments/assets/1aa71461-8808-4c50-96fa-bc49e1b2a92d)
+
 
 ## Key Features
 
