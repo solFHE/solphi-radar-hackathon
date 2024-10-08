@@ -199,6 +199,11 @@ Twitter API Integration:
   - Behavioral Monitoring: Continuous 
 ```
 
+## Revenue Model
+![Revenue Model](https://github.com/user-attachments/assets/4c312b19-4135-4c85-a5b4-850800eb38aa)
+
+
+
 ## 🛠 Installation
 
 Detailed installation instructions...
@@ -207,7 +212,8 @@ Detailed installation instructions...
 
 Step-by-step guide on how to use solΦ...
 
-## 🤝 Contributing
+## 🤝 Contributing | Team
+![Team](https://github.com/user-attachments/assets/544e2ab1-5578-400e-9399-f78003f6be03)
 
 We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for more details.
 
