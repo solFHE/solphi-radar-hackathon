@@ -1,5 +1,7 @@
 # solΦ: Privacy-Preserving Advertising Platform
-![1](https://github.com/user-attachments/assets/00468590-236a-4d69-98d5-c2ce8fa4cb81)
+<div style="text-align: center;">
+  <img src="https://github.com/user-attachments/assets/00468590-236a-4d69-98d5-c2ce8fa4cb81" style="border-radius: 15px; width: 300px;">
+</div>
 
 <div align="center">
   
