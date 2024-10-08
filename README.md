@@ -43,6 +43,8 @@ solΦ is an private advertising platform where users earn revenue by watching ad
 
 ## Key Features
 
+![Features](https://github.com/user-attachments/assets/abe87fc2-a515-4ec4-a433-64902698868d)
+
 | Feature | Description | Technology Stack |
 |---------|-------------|-------------------|
 | Multi-Chain Support | Seamless integration with Solana and future blockchain networks | Solana SDK, Wormhole Protocol |
@@ -51,7 +53,6 @@ solΦ is an private advertising platform where users earn revenue by watching ad
 | AI-Powered Matching | Intelligent ad-to-user pairing | gize.tech NLP algorithms (future integration) |
 | User Rewards | "Blinks" token system for engagement | SPL Token, Solana Token Program |
 | Cross-Chain Interoperability | Fluid asset and data transfer between supported chains | Wormhole Bridge |
-![Features](https://github.com/user-attachments/assets/8e475813-fa43-4911-a5f2-55f9567756a6)
 
 
 ## 🏗 System Architecture
