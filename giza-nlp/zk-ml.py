@@ -8,6 +8,8 @@ import os
 import certifi
 from typing import Dict, List, Any
 
+# SSL Sertifikası ayarı - Giza API ile uyumlu çalışmak için gerekli.
+# os.environ['SSL_CERT_FILE'] = certifi.where()
 
 # Giza DatasetHub ve DatasetLoader tanımlamaları
 hub = DatasetsHub()
@@ -33,31 +35,34 @@ def load_zk_compression_result(file_path: str) -> Dict[str, Any]:
 
 def get_blink_data() -> List[Dict[str, Any]]:
     """
-    Giza DatasetHub üzerinden 'Blink' veri setini al.
+    Giza DatasetHub üzerinden 'zk-ml' veri setini al.
     
     Returns:
-        List[Dict]: Blink veri setinin bir listesi
+        List[Dict]: zk-ml veri setinin bir listesi
     """
-    # Blink etiketine sahip veri setini alıyoruz
-    datasets = hub.get_by_tag('Blink')
+    # zk-ml etiketine sahip veri setini alıyoruz
+    datasets = hub.get_by_tag('zk-ml')
     if not datasets:
-        raise ValueError("Blink veri seti bulunamadı.")
+        raise ValueError("zk-ml veri seti bulunamadı.")
     
-    # İlk Blink veri setini yüklüyoruz
-    blink_data = loader.load(datasets[0].name)
-    return blink_data
+    # İlk zk-ml veri setini yüklüyoruz
+    zk_ml_data = loader.load(datasets[0].name)
+    return zk_ml_data
 
 def preprocess_text(text: str) -> str:
     """
-    Metni ön işleme tabi tutarak küçük harflere çevir.
+    Metni ön işleme tabi tutarak küçük harflere çevir ve gereksiz karakterleri temizle.
     
     Args:
         text (str): Önişleme yapılacak metin
     
     Returns:
-        str: Küçük harflere çevrilmiş metin
+        str: Önişleme yapılmış metin
     """
-    return text.lower()
+    text = text.lower()
+    # Gereksiz karakterleri temizle (noktalama işaretleri vs.)
+    text = ''.join(char for char in text if char.isalnum() or char.isspace())
+    return text
 
 def calculate_similarity(text1: str, text2: str) -> float:
     """
@@ -74,13 +79,13 @@ def calculate_similarity(text1: str, text2: str) -> float:
     tfidf_matrix = vectorizer.fit_transform([text1, text2])
     return cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:2])[0][0]
 
-def find_best_blink(zk_result: Dict[str, Any], blink_data: List[Dict[str, Any]]) -> Dict[str, Any]:
+def find_best_match(zk_result: Dict[str, Any], zk_ml_data: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
-    zk sonucu ile blink verileri arasında en iyi eşleşmeyi bul.
+    zk sonucu ile zk-ml verileri arasında en iyi eşleşmeyi bul.
     
     Args:
         zk_result (dict): zk-compression sonucunun JSON formatı
-        blink_data (list): Blink veri seti
+        zk_ml_data (list): zk-ml veri seti
     
     Returns:
         dict: En uygun eşleşme
@@ -89,35 +94,35 @@ def find_best_blink(zk_result: Dict[str, Any], blink_data: List[Dict[str, Any]])
     zk_text = preprocess_text(json.dumps(zk_result))
     
     best_similarity = -1
-    best_blink = None
+    best_match = None
 
-    # Her bir blink verisi ile benzerlik hesaplıyoruz
-    for blink in blink_data:
-        blink_text = preprocess_text(blink['description'])
-        similarity = calculate_similarity(zk_text, blink_text)
+    # Her bir zk-ml verisi ile benzerlik hesaplıyoruz
+    for zk_ml in zk_ml_data:
+        zk_ml_text = preprocess_text(zk_ml['description'])
+        similarity = calculate_similarity(zk_text, zk_ml_text)
         
         # Eğer bu benzerlik daha iyiyse, güncelliyoruz
         if similarity > best_similarity:
             best_similarity = similarity
-            best_blink = blink
+            best_match = zk_ml
 
-    return best_blink
+    return best_match
 
-def print_blink_info(blink: Dict[str, Any]):
+def print_match_info(match: Dict[str, Any]):
     """
-    Blink bilgilerini güzel bir şekilde ekrana basar.
+    Eşleşen verinin bilgilerini güzel bir şekilde ekrana basar.
     
     Args:
-        blink (dict): Blink veri sözlüğü
+        match (dict): Eşleşen veri sözlüğü
     """
     print(f"En uygun sonuç bulundu:")
-    print(f"Başlık: {blink['title']}")
-    print(f"Açıklama: {blink['description']}")
-    print(f"Bağlantı: {blink['url']}")
+    print(f"Başlık: {match['title']}")
+    print(f"Açıklama: {match['description']}")
+    print(f"Bağlantı: {match['url']}")
 
 def main(zk_result_path: str):
     """
-    Ana fonksiyon - zk-compression sonucu ve Blink verileri ile en iyi eşleşmeyi bulur.
+    Ana fonksiyon - zk-compression sonucu ve zk-ml verileri ile en iyi eşleşmeyi bulur.
     
     Args:
         zk_result_path (str): zk-compression sonucunun dosya yolu
@@ -129,19 +134,19 @@ def main(zk_result_path: str):
         print(e)
         return
 
-    # Blink verilerini al
+    # zk-ml verilerini al
     try:
-        blink_data = get_blink_data()
+        zk_ml_data = get_blink_data()
     except ValueError as e:
         print(e)
         return
 
-    # En uygun Blink veri setini bul
-    best_blink = find_best_blink(zk_result, blink_data)
+    # En uygun zk-ml veri setini bul
+    best_match = find_best_match(zk_result, zk_ml_data)
 
     # En uygun eşleşme bulunduysa ekrana bas, aksi halde bilgi ver
-    if best_blink:
-        print_blink_info(best_blink)
+    if best_match:
+        print_match_info(best_match)
     else:
         print("Uygun bir eşleşme bulunamadı.")
 
