@@ -216,7 +216,7 @@ Detailed installation instructions...
 Step-by-step guide on how to use solΦ...
 
 ## 🤝 Contributing | Team
-![Team](https://github.com/user-attachments/assets/544e2ab1-5578-400e-9399-f78003f6be03)
+![Alt](https://repobeats.axiom.co/api/embed/1ce28716df55c38359f6535b22d6628b192be982.svg "Repobeats analytics image")
 
 We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for more details.
 
